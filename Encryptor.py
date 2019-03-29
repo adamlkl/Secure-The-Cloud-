@@ -5,6 +5,9 @@ Created on Fri Mar 29 14:35:29 2019
 
 @author: Adamlkl
 """
+'''
+    https://docs.python-guide.org/scenarios/crypto/
+'''
 from cryptography.fernet import Fernet
 
 class Encryptor:
