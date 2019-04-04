@@ -13,4 +13,8 @@ Created on Fri Mar 29 15:51:42 2019
 
 class KeySaver:
     
+    def save_key():
+    
+    def get_key():
+    
     
