@@ -11,25 +11,40 @@ Created on Fri Mar 29 14:35:29 2019
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
 
 class Encryptor:
     
+    @staticmethod
     def generate_key(self):
         key = Fernet.generate_key()
         return key
-    
+
+    @staticmethod
     def generate_private_key(self):
         private_key = rsa.generate_private_key(
             public_exponent=65537,
             key_size=2048, 
             backend=default_backend())
         return private_key
-                
+    
+    # serialize public key
+    @staticmethod
+    def serialize_key(private_key):
+        public_key = private_key.public_key()
+        pem = public_key.public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
+        )
+        return pem
+    
+    @staticmethod
     def encrypt(self, some_file, key):
         cipher_suite = Fernet(key)
         encrypted_file = cipher_suite.encrypt(file)
         return encrypted_file
-        
+    
+    @staticmethod
     def decrypt(self, encrypted_file, key):
         cipher_suite = Fernet(key)
         decrypted_file = cipher_suite.decrypt(encrypted_file)
@@ -37,7 +52,7 @@ class Encryptor:
 
 def main():
     encryptor = Encryptor()
-    ecrypted_text = encryptor.encrypt(some_file, key) 
+    encrypted_text = encryptor.encrypt(some_file, key) 
     
 if __name__ == '__main__':
     main()
