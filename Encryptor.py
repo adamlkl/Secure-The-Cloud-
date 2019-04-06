@@ -63,3 +63,11 @@ def decrypt(filename, key):
         decrypted_file = open("decrypted_"+filename, "wb+")
     decrypted_file.write(decrypted_text)
     decrypted_file.close()
+
+def main():
+    key = generate_key()
+    encrypt("testfiles/COPYLIST.txt",key)
+    decrypt("testfiles/COPYLIST.txt",key)
+    
+if __name__ == '__main__':
+    main()
