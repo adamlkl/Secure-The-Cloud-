@@ -12,47 +12,54 @@ from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
+        
+def generate_key():
+    key = Fernet.generate_key()
+    return key
 
-class Encryptor:
-    
-    @staticmethod
-    def generate_key(self):
-        key = Fernet.generate_key()
-        return key
+def generate_private_key():
+    private_key = rsa.generate_private_key(
+        public_exponent=65537,
+        key_size=2048, 
+        backend=default_backend())
+    return private_key
 
-    @staticmethod
-    def generate_private_key(self):
-        private_key = rsa.generate_private_key(
-            public_exponent=65537,
-            key_size=2048, 
-            backend=default_backend())
-        return private_key
-    
-    # serialize public key
-    @staticmethod
-    def serialize_key(private_key):
-        public_key = private_key.public_key()
-        pem = public_key.public_bytes(
-            encoding=serialization.Encoding.PEM,
-            format=serialization.PublicFormat.SubjectPublicKeyInfo
-        )
-        return pem
-    
-    @staticmethod
-    def encrypt(self, some_file, key):
-        cipher_suite = Fernet(key)
-        encrypted_file = cipher_suite.encrypt(file)
-        return encrypted_file
-    
-    @staticmethod
-    def decrypt(self, encrypted_file, key):
-        cipher_suite = Fernet(key)
-        decrypted_file = cipher_suite.decrypt(encrypted_file)
-        return decrypted_file
+# serialize public key
+def serialize_key(private_key):
+    public_key = private_key.public_key()
+    pem = public_key.public_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PublicFormat.SubjectPublicKeyInfo
+    )
+    return pem
 
-def main():
-    encryptor = Encryptor()
-    encrypted_text = encryptor.encrypt(some_file, key) 
+def encrypt(filename, key):
+    cipher_suite = Fernet(key)
+
+    plain_file = open(filename, "rb")
+    plain_text = plain_file.read()
+    plain_file.close()
+
+    encrypted_text = cipher_suite.encrypt(plain_text)
+    encrypted_file = open(filename+".aes", "wb+")
+    encrypted_file.write(encrypted_text)
+    encrypted_file.close()
+
+def decrypt(filename, key):
+    cipher_suite = Fernet(key)
     
-if __name__ == '__main__':
-    main()
+    encrypted_file = open(filename+".aes", "rb")
+    encrypted_text = encrypted_file.read()
+    encrypted_file.close()
+    
+    decrypted_text = cipher_suite.decrypt(encrypted_text)
+    if '/' in filename:
+        index = filename.rfind('/')
+        format_name = filename[0:index]
+        format_name = format_name + "/decrypted_"
+        format_name = format_name + filename[index+1:]
+        decrypted_file = open(format_name, "wb+")
+    else:
+        decrypted_file = open("decrypted_"+filename, "wb+")
+    decrypted_file.write(decrypted_text)
+    decrypted_file.close()

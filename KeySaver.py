@@ -20,4 +20,5 @@ class KeySaver:
                 format=serialization.PrivateFormat.PKCS8,
                 encryption_algorithm=serialization.BestAvailableEncryption(b'mypassword')
         )
+        
     def get_key():
