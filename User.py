@@ -5,14 +5,19 @@ Created on Thu Apr  4 09:11:25 2019
 
 @author: Adamlkl
 """
+import os
 import sys
 import random 
 import Encryptor
+import KeySaver
 from multiprocessing.connection import Listener
 from multiprocessing.connection import Client
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
-    
+
+folder_Id = '17oua44SP5sR6E_g_h3a9Ua5qjHqAFvF'
+             #14nmbiUyCm-Ld7sY2aOO3v4P2JpmYoMzK
+             
 def send_key(username, address, port, group_address, group_listener, private_key):
     conn = Client(address, authkey=b'secret password')
     ser_key = Encryptor.serialize_key(private_key)
@@ -22,7 +27,11 @@ def send_key(username, address, port, group_address, group_listener, private_key
 def retrieve_file(symmetric_key, filename, drive):
     return None 
     
-def upload_file(symmetric_key, filename, drive):
+def upload_file(key, filename, drive):
+    file4 = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": "1gPPLp6BmCAqWxYXDPv8E38H4ZVBe64bY"}],'title':filename})
+    with open (os.path.join("groupFiles",filename),'rb') as uploadfile:
+        file4.SetContentString(key.encrypt(uploadfile.read()).decode())
+    file4.Upload()
     return None
     
 def usage():

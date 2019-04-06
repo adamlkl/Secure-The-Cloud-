@@ -11,8 +11,8 @@ Created on Fri Mar 29 14:35:29 2019
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import serialization
-        
+import os 
+
 def generate_key():
     key = Fernet.generate_key()
     return key
@@ -23,15 +23,6 @@ def generate_private_key():
         key_size=2048, 
         backend=default_backend())
     return private_key
-
-# serialize public key
-def serialize_key(private_key):
-    public_key = private_key.public_key()
-    pem = public_key.public_bytes(
-        encoding=serialization.Encoding.PEM,
-        format=serialization.PublicFormat.SubjectPublicKeyInfo
-    )
-    return pem
 
 def encrypt(filename, key):
     cipher_suite = Fernet(key)
@@ -48,6 +39,11 @@ def encrypt(filename, key):
 def decrypt(filename, key):
     cipher_suite = Fernet(key)
     
+    '''
+    with open(os.path.join("EncryptedFiles",filename), 'rb') as encrypted_file:
+        encrypted_text = encrypted_file.read()
+        encrypted_file.close()
+    '''
     encrypted_file = open(filename+".aes", "rb")
     encrypted_text = encrypted_file.read()
     encrypted_file.close()
