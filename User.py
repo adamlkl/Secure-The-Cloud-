@@ -27,12 +27,12 @@ def send_key(username, address, port, group_address, group_listener, private_key
 def retrieve_file(symmetric_key, filename, drive):
     return None 
     
-def upload_file(key, filename, drive):
-    file4 = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": "1gPPLp6BmCAqWxYXDPv8E38H4ZVBe64bY"}],'title':filename})
-    with open (os.path.join("groupFiles",filename),'rb') as uploadfile:
-        file4.SetContentString(key.encrypt(uploadfile.read()).decode())
+def upload_file(filename, drive):
+    file4 = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": "17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy"}],'title':filename})
+    with open (os.path.join("testfiles",filename),'rb') as uploadfile:
+        #file4.SetContentString(key.encrypt(uploadfile.read()).decode())
+        file4.SetContentString(uploadfile.read())
     file4.Upload()
-    return None
     
 def usage():
     print "help"
@@ -44,29 +44,37 @@ def print_fileList(drive):
         print('title: %s, id: %s' % (file1['title'], file1['id']))
     
 def main():
-    inputs = raw_input("How can I help you?")
-    argv = inputs.split(' ')
-    if len(argv)!=2:
-        print "Usage: python ex.py "
-        sys.exit(1)
-    else:
-        command = argv[0]
-        filename = argv[1]
-        gauth = GoogleAuth()
-        gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.
-        # Create GoogleDrive instance with authenticated GoogleAuth instance.
-        drive = GoogleDrive(gauth)
-        address = ('localhost', 6000)
-        port = random.randint(6001,7000)
-        group_address = ('localhost', port)     # family is deduced to be 'AF_INET'
-        group_listener = Listener(group_address, authkey=b'secret password')
-        
-        if command == "upload":
-            upload_file()
-        elif command == "download":
-            retrieve_file()
+    gauth = GoogleAuth()
+    gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.
+    
+    # Create GoogleDrive instance with authenticated GoogleAuth instance.
+    drive = GoogleDrive(gauth)
+    address = ('localhost', 6000)
+    port = random.randint(6001,7000)
+    group_address = ('localhost', port)     # family is deduced to be 'AF_INET'
+    group_listener = Listener(group_address, authkey=b'secret password')
+    running = True
+    
+    while running:
+        inputs = raw_input("How can I help you?\n")
+        argv = inputs.split(' ')
+        if len(argv)>2:
+            print "Usage: python ex.py "
+            sys.exit(1)
         else:
-            usage()
+            command = argv[0]
+            
+            if command == "upload":
+                filename = argv[1]
+                upload_file(filename,drive)
+            elif command == "download":
+                filename = argv[1]
+                retrieve_file()
+            elif command == "quit":
+                running = False 
+                print "Goodbye"
+            else:
+                usage()
     
 if __name__ == '__main__':
     main()
