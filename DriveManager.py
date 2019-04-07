@@ -9,6 +9,7 @@ import Encryptor
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
+# encrypt all the files in the drive folder usng key passed
 def encrypt_all_files(key, folder):
     for file1 in folder:
         plain_text = file1.GetContentString()    
@@ -16,7 +17,8 @@ def encrypt_all_files(key, folder):
         file1.SetContentString(encrypted_text.decode())
         file1.Upload()
         print(encrypted_text)
-            
+
+# decrypt all the files in the drive folder usng key passed
 def decrypt_all_files(key, folder):
     for file1 in folder:
         print('title: %s, id: %s' % (file1['title'], file1['id']))
@@ -26,10 +28,12 @@ def decrypt_all_files(key, folder):
         file1.Upload()
         print(decrypted_text)
 
+# list all files in the drive folder 
 def list_all_files(folder):
     for file1 in folder:
         print('title: %s, id: %s' % (file1['title'], file1['id']))
 
+# clean the drive folder by deleting all files in it 
 def delete_all_files(folder):
     for file1 in folder:
         print('Deleting file... title: %s, id: %s' % (file1['title'], file1['id']))

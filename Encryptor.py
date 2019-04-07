@@ -14,12 +14,12 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
 
-import os 
-
+# generate normal key
 def generate_key():
     key = Fernet.generate_key()
     return key
 
+# generates a new RSA private key using the provided backend with 2048 bits
 def generate_private_key():
     private_key = rsa.generate_private_key(
         public_exponent=65537,
@@ -27,9 +27,10 @@ def generate_private_key():
         backend=default_backend())
     return private_key
 
-def encrypt_asymmetric_key(public_key, asym_key):
+# encrypt symmetric key using public key passed 
+def encrypt_symmetric_key(public_key, sym_key):
     encrypted_key = public_key.encrypt(
-                        asym_key,
+                        sym_key,
                         padding.OAEP(
                             mgf=padding.MGF1(algorithm=hashes.SHA256()),
                             algorithm=hashes.SHA256(),
@@ -37,16 +38,18 @@ def encrypt_asymmetric_key(public_key, asym_key):
                         )
                     )
     return encrypted_key
-# put os here 
-# take filename 
+
+# encrypt plain text using key passed 
 def encrypt(plain_text, key):
     cipher_suite = Fernet(key)
     return cipher_suite.encrypt(plain_text)
 
+# decrypt encrypted text using key passed 
 def decrypt(encrypted_text, key):
     cipher_suite = Fernet(key)
     return cipher_suite.decrypt(encrypted_text)
-    
+
+# -----------------testing functions--------------------------------------
 def encryptt(filename, key):
     cipher_suite = Fernet(key)
 
