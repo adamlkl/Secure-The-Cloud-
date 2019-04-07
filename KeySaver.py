@@ -13,7 +13,8 @@ Created on Fri Mar 29 15:51:42 2019
 import os
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
-
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives import hashes
 
 def save_key(username, private_key):
     '''
@@ -48,3 +49,15 @@ def serialize_key(private_key):
             format=serialization.PublicFormat.SubjectPublicKeyInfo
         )
     return pem
+
+def generate_symmetric_key(private_key, encryption_key):
+    symkey = private_key.decrypt(
+                encryption_key,
+                padding.OAEP(
+                    mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                    algorithm=hashes.SHA256(),
+                    label=None
+                )
+            )
+    return symkey
+    

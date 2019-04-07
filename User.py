@@ -7,21 +7,49 @@ Created on Thu Apr  4 09:11:25 2019
 """
 import os
 import sys
+import time
+import queue
 import random 
+import threading
 import Encryptor
 import KeySaver 
 from multiprocessing.connection import Listener
 from multiprocessing.connection import Client
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives import hashes
 
 folder_Id = '17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy'
              
-def send_key(username, address, port, group_address, group_listener, sym_key):
+def send_key(username, address, port, group_address, group_listener, user_key):
+    ser_key = KeySaver.serialize_key(user_key)
     conn = Client(address, authkey=b'secret password')
-    conn.send(username, port, sym_key)
+    conn.send(username, port, ser_key)
     conn.close()
     # send key to group
+    #---
+
+    group_connection = group_listener.accept()
+
+    encryption_key = b"error"
+    try:
+        encryption_key = group_connection.recv()
+    except:
+        pass
+    group_connection.close()
+    '''
+    symkey = user_key.decrypt(
+                encryption_key,
+                padding.OAEP(
+                    mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                    algorithm=hashes.SHA256(),
+                    label=None
+                )
+            )
+    '''
+    return KeySaver.generate_symmetric_key(user_key, encryption_key)
+    
     
 def retrieve_file(symmetric_key, filename, drive):
     file_list = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
@@ -60,14 +88,13 @@ def main():
     gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.
     # Create GoogleDrive instance with authenticated GoogleAuth instance.
     drive = GoogleDrive(gauth)
-    sym_key = KeySaver.serialize_key(user_key)
-    '''
+
     address = ('localhost', 6000)
     port = random.randint(6001,7000)
     group_address = ('localhost', port)     # family is deduced to be 'AF_INET'
     group_listener = Listener(group_address, authkey=b'secret password')
-    send_key(username, address, port, group_address, group_listener, user_key)
-    '''
+    
+    sym_key = send_key(username, address, port, group_address, group_listener, user_key)
     
     running = True
     
