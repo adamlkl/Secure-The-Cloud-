@@ -44,7 +44,7 @@ class CloudGroup(threading.Thread):
             #print(msg)
             if len(message)==3:  
                 self.lock.acquire()
-                if message[0] in self.valid and self.valid[message[0]] == True:
+                if message[0] in self.users:
                     client_address = ('localhost', message[1])
                     response = Client(client_address, authkey=b'secret password')
                     
@@ -52,8 +52,11 @@ class CloudGroup(threading.Thread):
                     encrypted_key = Encryptor.encrypt_asymmetric_key(public_key, self.key)
                     response.send(encrypted_key)
                     response.close()
+                else:
+                    print('Unauthorised access by %s' % (message[0]))
                 self.lock.release()
-                connection.close()
+                
+            connection.close()
         
     
 
@@ -67,7 +70,7 @@ def reset(key, drive, client_handler, sym_key_filename):
     with open(os.path.join("SymmetricKey",sym_key_filename), 'wb') as key_file:
         key_file.write(new_key)
     client_handler.change_key(new_key)
-    DriveManager.decrypt_all_files(new_key, folder)
+    DriveManager.encrypt_all_files(new_key, folder)
            
 def main():
     filename = 'UserList'
@@ -119,7 +122,7 @@ def main():
             users.close()
             client_handler.close()
             running = False
-            print 'Goodbye'
+            print 'Goodbye' 
             
         elif argv[0] == 'list':
             print 'Users:'

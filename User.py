@@ -22,10 +22,10 @@ from cryptography.hazmat.primitives import hashes
 
 folder_Id = '17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy'
              
-def send_key(username, address, port, group_address, group_listener, user_key):
+def retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key):
     ser_key = KeySaver.serialize_key(user_key)
     conn = Client(address, authkey=b'secret password')
-    conn.send(username, port, ser_key)
+    conn.send([username, port, ser_key])
     conn.close()
     # send key to group
     #---
@@ -51,19 +51,20 @@ def send_key(username, address, port, group_address, group_listener, user_key):
     return KeySaver.generate_asymmetric_key(user_key, encryption_key)
     
   #TODO  decrypt 
-def retrieve_file(symmetric_key, filename, drive):
+def retrieve_file(asymmetric_key, filename, drive):
     file_list = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
     for file1 in file_list:
         if file1["title"] == filename:
-            encoded = file1.GetContentString()    
-            #unencoded = f.decrypt(encoded.encode())
-            print(encoded)
+            encrypted_text = file1.GetContentString()    
+            decrypted_text = Encryptor.decrypt(encrypted_text.encode(), asymmetric_key,)
+            print("sth")
+            print(decrypted_text)
     
-def upload_file(symmetric_key, filename, drive):
+def upload_file(asymmetric_key, filename, drive):
     u_file = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": "17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy"}],'title':filename})
     with open (os.path.join("testfiles",filename),'rb') as uploadfile:
         plain_text = uploadfile.read()
-        encrypted_text = Encryptor.encryptt(plain_text, symmetric_key)
+        encrypted_text = Encryptor.encrypt(plain_text, asymmetric_key)
         u_file.SetContentString(encrypted_text.decode())
     u_file.Upload()
     
@@ -94,7 +95,7 @@ def main():
     group_address = ('localhost', port)     # family is deduced to be 'AF_INET'
     group_listener = Listener(group_address, authkey=b'secret password')
     
-    sym_key = send_key(username, address, port, group_address, group_listener, user_key)
+    sym_key = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
     
     running = True
     

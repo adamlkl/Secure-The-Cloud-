@@ -11,6 +11,9 @@ Created on Fri Mar 29 14:35:29 2019
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives import hashes
+
 import os 
 
 def generate_key():
@@ -36,15 +39,15 @@ def encrypt_asymmetric_key(public_key, asym_key):
     return encrypted_key
 # put os here 
 # take filename 
-def encryptt(plain_text, key):
+def encrypt(plain_text, key):
     cipher_suite = Fernet(key)
     return cipher_suite.encrypt(plain_text)
 
-def decryptt(encrypted_text, key):
+def decrypt(encrypted_text, key):
     cipher_suite = Fernet(key)
     return cipher_suite.decrypt(encrypted_text)
     
-def encrypt(filename, key):
+def encryptt(filename, key):
     cipher_suite = Fernet(key)
 
     plain_file = open(filename, "rb")
@@ -56,7 +59,7 @@ def encrypt(filename, key):
     encrypted_file.write(encrypted_text)
     encrypted_file.close()
 
-def decrypt(filename, key):
+def decryptt(filename, key):
     cipher_suite = Fernet(key)
     
     '''
