@@ -13,8 +13,8 @@ import random
 import threading
 import Encryptor
 import KeySaver 
-from multiprocessing.connection import Listener
 from multiprocessing.connection import Client
+from multiprocessing.connection import Listener
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from cryptography.hazmat.primitives.asymmetric import padding
@@ -48,7 +48,7 @@ def send_key(username, address, port, group_address, group_listener, user_key):
                 )
             )
     '''
-    return KeySaver.generate_symmetric_key(user_key, encryption_key)
+    return KeySaver.generate_asymmetric_key(user_key, encryption_key)
     
   #TODO  decrypt 
 def retrieve_file(symmetric_key, filename, drive):

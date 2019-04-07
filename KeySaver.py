@@ -50,7 +50,7 @@ def serialize_key(private_key):
         )
     return pem
 
-def generate_symmetric_key(private_key, encryption_key):
+def generate_asymmetric_key(private_key, encryption_key):
     symkey = private_key.decrypt(
                 encryption_key,
                 padding.OAEP(
@@ -60,4 +60,6 @@ def generate_symmetric_key(private_key, encryption_key):
                 )
             )
     return symkey
-    
+
+def load_public_key(key):
+    return serialization.load_pem_public_key(key,backend=default_backend())

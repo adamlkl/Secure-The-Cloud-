@@ -24,6 +24,16 @@ def generate_private_key():
         backend=default_backend())
     return private_key
 
+def encrypt_asymmetric_key(public_key, asym_key):
+    encrypted_key = public_key.encrypt(
+                        asym_key,
+                        padding.OAEP(
+                            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                            algorithm=hashes.SHA256(),
+                            label=None
+                        )
+                    )
+    return encrypted_key
 # put os here 
 # take filename 
 def encryptt(plain_text, key):
