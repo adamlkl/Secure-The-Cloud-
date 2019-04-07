@@ -57,8 +57,10 @@ def retrieve_file(asymmetric_key, filename, drive):
         if file1["title"] == filename:
             encrypted_text = file1.GetContentString()    
             decrypted_text = Encryptor.decrypt(encrypted_text.encode(), asymmetric_key,)
-            print("sth")
             print(decrypted_text)
+            with open (os.path.join("downloads",filename),'wb') as d_file:
+                d_file.write(decrypted_text)
+                d_file.close()
     
 def upload_file(asymmetric_key, filename, drive):
     u_file = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": "17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy"}],'title':filename})
@@ -66,6 +68,7 @@ def upload_file(asymmetric_key, filename, drive):
         plain_text = uploadfile.read()
         encrypted_text = Encryptor.encrypt(plain_text, asymmetric_key)
         u_file.SetContentString(encrypted_text.decode())
+        uploadfile.close()
     u_file.Upload()
     
 def usage():
@@ -94,13 +97,12 @@ def main():
     port = random.randint(6001,7000)
     group_address = ('localhost', port)     # family is deduced to be 'AF_INET'
     group_listener = Listener(group_address, authkey=b'secret password')
-    
     sym_key = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
-    
     running = True
     
-    while running:
+    while running:     
         inputs = raw_input("How can I help you?\n")
+        sym_key = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
         argv = inputs.split(' ')
         if len(argv)>2:
             print "Usage: python ex.py "

@@ -15,7 +15,6 @@ def encrypt_all_files(key, folder):
         encrypted_text = Encryptor.encrypt(plain_text.encode(), key)
         file1.SetContentString(encrypted_text.decode())
         file1.Upload()
-        #unencoded = f.decrypt(encoded.encode())
         print(encrypted_text)
             
 def decrypt_all_files(key, folder):
