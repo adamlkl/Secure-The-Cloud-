@@ -50,7 +50,7 @@ def send_key(username, address, port, group_address, group_listener, user_key):
     '''
     return KeySaver.generate_symmetric_key(user_key, encryption_key)
     
-    
+  #TODO  decrypt 
 def retrieve_file(symmetric_key, filename, drive):
     file_list = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
     for file1 in file_list:
@@ -72,7 +72,7 @@ def usage():
     
 def print_fileList(drive):
     # Auto-iterate through all files that matches this query
-    file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+    file_list = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
     for file1 in file_list:
         print('title: %s, id: %s' % (file1['title'], file1['id']))
     

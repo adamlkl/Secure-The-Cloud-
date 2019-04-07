@@ -21,22 +21,33 @@ def encrypt_all_files(key, folder):
 def decrypt_all_files(key, folder):
     for file1 in folder:
         encrypted_text = file1.GetContentString()    
-        decrypted_text = Encryptor.decryptt(encrypted_text.decode(), key)
-        file1.SetContentString(decrypted_text.encode())
+        decrypted_text = Encryptor.decryptt(encrypted_text.encode(), key)
+        file1.SetContentString(decrypted_text.decode())
         file1.Upload()
         #unencoded = f.decrypt(encoded.encode())
-        print(encrypted_text)
+        print(decrypted_text)
 
 def list_all_files(folder):
     for file1 in folder:
-        print(file1["title"]) 
+        print('title: %s, id: %s' % (file1['title'], file1['id']))
+
+def delete_all_files(folder):
+    for file1 in folder:
+        print('Deleting file... title: %s, id: %s' % (file1['title'], file1['id']))
+        file1.Delete()
     
 def main():
     gauth = GoogleAuth()
     gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.
     # Create GoogleDrive instance with authenticated GoogleAuth instance.
     drive = GoogleDrive(gauth)
+    
+    key = Encryptor.generate_key()
     folder = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
+    
+    #testing if I can get the encryption and decryption properly
+    encrypt_all_files(key, folder)
+    decrypt_all_files(key, folder)
     list_all_files(folder)
     
 if __name__ == '__main__':
