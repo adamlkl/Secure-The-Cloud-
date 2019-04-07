@@ -24,6 +24,10 @@ def generate_private_key():
         backend=default_backend())
     return private_key
 
+def encryptt(plain_text, key):
+    cipher_suite = Fernet(key)
+    return cipher_suite.encrypt(plain_text)
+    
 def encrypt(filename, key):
     cipher_suite = Fernet(key)
 

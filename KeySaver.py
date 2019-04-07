@@ -15,7 +15,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 
 
-def save_key(private_key, username):
+def save_key(username, private_key):
     '''
     pem = private_key.private_bytes(
             encoding=serialization.Encoding.PEM,
@@ -28,11 +28,11 @@ def save_key(private_key, username):
             format=serialization.PrivateFormat.PKCS8,
             encryption_algorithm=serialization.NoEncryption()
     )
-    with open(os.path.join("UserKeys",username), 'rb') as key_file:
+    with open(os.path.join("Users",username), 'wb') as key_file:
         key_file.write(pem)
     
 def load_key(username):
-    with open(os.path.join("UserKeys",username), 'rb') as key_file:
+    with open(os.path.join("Users",username), 'rb') as key_file:
         private_key = serialization.load_pem_private_key(
             key_file.read(),
             password=None,
