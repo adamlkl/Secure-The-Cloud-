@@ -16,6 +16,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
 
+# save user's private key using username passed in local folders 
 def save_key(username, private_key):
     '''
     pem = private_key.private_bytes(
@@ -32,6 +33,7 @@ def save_key(username, private_key):
     with open(os.path.join("Users",username), 'wb') as key_file:
         key_file.write(pem)
     
+# load user's private key using username passed 
 def load_key(username):
     with open(os.path.join("Users",username), 'rb') as key_file:
         private_key = serialization.load_pem_private_key(
@@ -50,6 +52,7 @@ def serialize_key(private_key):
         )
     return pem
 
+# generate symmetric key using SHA-256 hashing algorithm
 def generate_symmetric_key(private_key, encryption_key):
     symkey = private_key.decrypt(
                 encryption_key,
@@ -61,5 +64,6 @@ def generate_symmetric_key(private_key, encryption_key):
             )
     return symkey
 
+# load public part of the key pair 
 def load_public_key(key):
     return serialization.load_pem_public_key(key,backend=default_backend())

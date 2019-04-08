@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  8 APR 2019 12:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  8 APR 2019 22:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -408,7 +408,7 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 8.
 
-[4] [5]) [6]
+[4] [5] [6]) [7]
 Underfull \hbox (badness 10000) in paragraph at lines 87--88
 
  []
@@ -439,8 +439,8 @@ File: omsptm.fd
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
- [7]
-(../CloudGroup.py [8] [9] [10]) [11]
+ [8]
+(../CloudGroup.py [9] [10] [11]) [12]
 Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
@@ -450,13 +450,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
 
-(../Encryptor.py [12] [13]) [14] (../DriveManager.py [15]) [16] (../KeySaver.py
-[17]) [18] (./Assignment Report .aux) ) 
+(../Encryptor.py [13] [14]) [15] (../DriveManager.py [16]) [17] (../KeySaver.py
+[18]) [19] (./Assignment Report .aux) ) 
 Here is how much of TeX's memory you used:
- 5756 strings out of 492649
- 75952 string characters out of 6129622
- 425706 words of memory out of 5000000
- 9539 multiletter control sequences out of 15000+600000
+ 5776 strings out of 492649
+ 76286 string characters out of 6129622
+ 418706 words of memory out of 5000000
+ 9559 multiletter control sequences out of 15000+600000
  13826 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,6n,43p,933b,1803s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -467,10 +467,10 @@ ier/ucrb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrr
 8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
 </usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/loca
 l/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "Assignment Report .pdf" (18 pages, 114050 bytes).
+Output written on "Assignment Report .pdf" (19 pages, 118677 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 91 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
