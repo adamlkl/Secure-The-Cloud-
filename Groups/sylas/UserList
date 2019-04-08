@@ -2,8 +2,10 @@ c__builtin__
 set
 p0
 ((lp1
-S'adam'
+S'katakuri'
 p2
-atp3
-Rp4
+aS'adam'
+p3
+atp4
+Rp5
 .

@@ -7,6 +7,7 @@ Created on Thu Apr  4 09:11:25 2019
 """
 import os
 import sys
+import pickle
 import random 
 import Encryptor
 import KeySaver 
@@ -16,14 +17,14 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
 folder_Id = '17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy'
- 
+             
 '''            
     - try to establish connection with CloudGroup
     - send over public key for symmetrical key encryption 
     - get encrypted symmetrical key from CloudGroup
     - if user is not in the userlist, encrypted symmetrical key won't be sent
 '''
-def retrieve_symmetrical_key(username, address, port, group_address, group_listener, user_key):
+def retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key):
     ser_key = KeySaver.serialize_key(user_key)
     conn = Client(address, authkey=b'secret password')
     conn.send([username, port, ser_key])
@@ -31,16 +32,17 @@ def retrieve_symmetrical_key(username, address, port, group_address, group_liste
 
     group_connection = group_listener.accept()
 
+    # res = b"error"
     encryption_key = b"error"
     try:
-        response = group_connection.recv()
-        encryption_key = response[0]
-        folder_id = response[1]
+        # res = group_connection.recv()
+        encryption_key = group_connection.recv()
     except:
         pass
     group_connection.close()
-    # return KeySaver.generate_symmetric_key(user_key, encryption_key)
-    return response
+    
+    # return res
+    return KeySaver.generate_symmetric_key(user_key, encryption_key)
     
 # download file from drive folder with key passed and save it to downloads
 def retrieve_file(symmetric_key, filename, drive, folder_id):
@@ -50,7 +52,6 @@ def retrieve_file(symmetric_key, filename, drive, folder_id):
         if file1["title"] == filename:
             encrypted_text = file1.GetContentString()    
             decrypted_text = Encryptor.decrypt(encrypted_text.encode(), symmetric_key,)
-            
             # printing downloaded text to check results 
             print(decrypted_text)
             
@@ -58,7 +59,7 @@ def retrieve_file(symmetric_key, filename, drive, folder_id):
             with open (os.path.join("downloads",filename),'wb') as d_file:
                 d_file.write(decrypted_text)
                 d_file.close()
-
+    
 # encrypt file with key passed and upload it to drive folder 
 def upload_file(symmetric_key, filename, drive, folder_id):
     u_file = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": folder_id}],'title':filename})
@@ -72,7 +73,7 @@ def upload_file(symmetric_key, filename, drive, folder_id):
 # print usage of the user page 
 def usage():
     print "Command List: \n1. upload <file> \n2. download <file> \n3. quit\n"
-    
+
 # print list of files in drive folder 
 def print_fileList(drive):
     # Auto-iterate through all files that matches this query
@@ -94,8 +95,8 @@ def main():
     except:
         user_key = Encryptor.generate_private_key()
         KeySaver.save_key(username, user_key)
-    
-    '''   
+        
+    '''
         - sets up local Google webserver to automatically receive
           authentication code from user and authorizes by itself.
     '''
@@ -110,9 +111,10 @@ def main():
         gauth.Authorize()
         
     gauth.SaveCredentialsFile("credentials.txt")
+    
     # Create GoogleDrive instance with authenticated GoogleAuth instance.
     drive = GoogleDrive(gauth)
-
+    
     '''
         - attempting to establish connection with CloudGroup to get symmetric 
           key for encryption of files
@@ -121,23 +123,40 @@ def main():
     port = random.randint(6001,7000)
     group_address = ('localhost', port)     # family is deduced to be 'AF_INET'
     group_listener = Listener(group_address, authkey=b'secret password')
-    sym_key = retrieve_symmetrical_key(username, address, port, group_address, group_listener, user_key)
+    
+    # crude way of getting available folders 
+    file_list = open("Drive Folders",'rb')
+    drive_folders = pickle.load(file_list)
+    file_list.close()
+    
+    '''
+    drive_folders.pop("sylas ")
+    print(drive_folders)
+    file_list = open("Drive Folders",'wb')
+    pickle.dump(drive_folders,file_list)
+    file_list.close()
+    '''
+    
+    folder_id = drive_folders['sylas']
+    sym_key = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
+    '''
+    res = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
+    sym_key = KeySaver.generate_asymmetric_key(user_key, res[0])
+    folder_id = res[1]
+    '''
     running = True
     
     while running:     
         inputs = raw_input("How can I help you?\n")
         
         # requests for symmetrical key in case it is changed
-        # sym_key = retrieve_symmetrical_key(username, address, port, group_address, group_listener, user_key)
-        res = retrieve_symmetrical_key(username, address, port, group_address, group_listener, user_key)
-        if isinstance(res, str):
-            print(res)
-            continue
-        else:
-             encryption_key = res[0]
-             folder_id = res[1]
-             sym_key = KeySaver.generate_symmetric_key(user_key, encryption_key)
-             
+        sym_key = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
+        '''
+        res = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
+        sym_key = KeySaver.generate_symmetric_key(user_key, res[0])
+        folder_id = res[1]
+        '''
+        
         # handles instructions from users
         argv = inputs.split(' ')
         if len(argv)>2:
@@ -145,7 +164,7 @@ def main():
             sys.exit(1)
         else:
             command = argv[0]
-        
+            
             if command == "upload":
                 filename = argv[1]
                 upload_file(sym_key, filename, drive, folder_id)
