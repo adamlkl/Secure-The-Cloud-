@@ -41,7 +41,16 @@ def delete_all_files(folder):
     
 def main():
     gauth = GoogleAuth()
-    gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.
+    gauth.LoadCredentialsFile("credentials.txt")
+    
+    if gauth.credentials is None or gauth.access_token_expired:
+        # Creates local webserver and auto handles authentication.
+        gauth.LocalWebserverAuth() 
+        
+    else: 
+        gauth.Authorize()
+        
+    gauth.SaveCredentialsFile("credentials.txt")
     # Create GoogleDrive instance with authenticated GoogleAuth instance.
     drive = GoogleDrive(gauth)
     

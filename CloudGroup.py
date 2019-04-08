@@ -6,6 +6,7 @@ Created on Fri Apr  5 13:19:19 2019
 @author: Adamlkl
 """
 import os
+import time
 import pickle 
 import threading
 import KeySaver 
@@ -86,6 +87,12 @@ def reset(key, drive, client_handler, sym_key_filename):
     DriveManager.encrypt_all_files(new_key, folder)
            
 def main():
+    groupname = raw_input("Enter group name:\n") 
+    group_path = os.path.join("Groups",groupname)
+    if not os.path.isdir(group_path):
+        os.mkdir(group_path)
+        
+    # filename = os.path.join(group_path,'UserList')
     filename = 'UserList'
     # load users in CloudGroup
     try:
@@ -112,8 +119,17 @@ def main():
           authentication code from user and authorizes by itself.
     '''
     gauth = GoogleAuth()
-    # Creates local webserver and auto handles authentication.
-    gauth.LocalWebserverAuth() 
+    gauth.LoadCredentialsFile("credentials.txt")
+    
+    if gauth.credentials is None or gauth.access_token_expired:
+        # Creates local webserver and auto handles authentication.
+        gauth.LocalWebserverAuth() 
+        
+    else: 
+        gauth.Authorize()
+        
+    gauth.SaveCredentialsFile("credentials.txt")
+    
     # Create GoogleDrive instance with authenticated GoogleAuth instance.
     drive = GoogleDrive(gauth)
     
