@@ -33,15 +33,18 @@ def retrieve_symmetrical_key(username, address, port, group_address, group_liste
 
     encryption_key = b"error"
     try:
-        encryption_key = group_connection.recv()
+        response = group_connection.recv()
+        encryption_key = response[0]
+        folder_id = response[1]
     except:
         pass
     group_connection.close()
-    return KeySaver.generate_symmetric_key(user_key, encryption_key)
+    # return KeySaver.generate_symmetric_key(user_key, encryption_key)
+    return response
     
 # download file from drive folder with key passed and save it to downloads
-def retrieve_file(symmetric_key, filename, drive):
-    file_list = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
+def retrieve_file(symmetric_key, filename, drive, folder_id):
+    file_list = drive.ListFile({'q': "'" + folder_id + "' in parents and trashed=false"}).GetList()
     for file1 in file_list:
         # find file to be downloaded 
         if file1["title"] == filename:
@@ -57,8 +60,8 @@ def retrieve_file(symmetric_key, filename, drive):
                 d_file.close()
 
 # encrypt file with key passed and upload it to drive folder 
-def upload_file(symmetric_key, filename, drive):
-    u_file = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": "17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy"}],'title':filename})
+def upload_file(symmetric_key, filename, drive, folder_id):
+    u_file = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": folder_id}],'title':filename})
     with open (os.path.join("testfiles",filename),'rb') as uploadfile:
         plain_text = uploadfile.read()
         encrypted_text = Encryptor.encrypt(plain_text, symmetric_key)
@@ -125,8 +128,16 @@ def main():
         inputs = raw_input("How can I help you?\n")
         
         # requests for symmetrical key in case it is changed
-        sym_key = retrieve_symmetrical_key(username, address, port, group_address, group_listener, user_key)
-        
+        # sym_key = retrieve_symmetrical_key(username, address, port, group_address, group_listener, user_key)
+        res = retrieve_symmetrical_key(username, address, port, group_address, group_listener, user_key)
+        if isinstance(res, str):
+            print(res)
+            continue
+        else:
+             encryption_key = res[0]
+             folder_id = res[1]
+             sym_key = KeySaver.generate_symmetric_key(user_key, encryption_key)
+             
         # handles instructions from users
         argv = inputs.split(' ')
         if len(argv)>2:
@@ -137,10 +148,10 @@ def main():
         
             if command == "upload":
                 filename = argv[1]
-                upload_file(sym_key, filename, drive)
+                upload_file(sym_key, filename, drive, folder_id)
             elif command == "download":
                 filename = argv[1]
-                retrieve_file(sym_key, filename, drive)
+                retrieve_file(sym_key, filename, drive, folder_id)
             elif command == "quit":
                 running = False 
                 print "Goodbye"

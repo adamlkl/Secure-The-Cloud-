@@ -9,6 +9,11 @@ import Encryptor
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
+def create_folder(parent_folderid, folder_name, drive):
+    file1 = drive.CreateFile({'title': folder_name, "parents":  [{"kind":"drive#fileLink", "id": parent_folderid}], "mimeType": "application/vnd.google-apps.folder"})
+    file1.Upload()
+    return file1["id"]
+    
 # encrypt all the files in the drive folder usng key passed
 def encrypt_all_files(key, folder):
     for file1 in folder:
@@ -20,13 +25,21 @@ def encrypt_all_files(key, folder):
 
 # decrypt all the files in the drive folder usng key passed
 def decrypt_all_files(key, folder):
+    find_folder(folder,"COPYLIST.txt")
     for file1 in folder:
         print('title: %s, id: %s' % (file1['title'], file1['id']))
-        encrypted_text = file1.GetContentString()    
+        encrypted_text = file1.GetContentString()  
+        print(encrypted_text.encode())
         decrypted_text = Encryptor.decrypt(encrypted_text.encode(), key)
         file1.SetContentString(decrypted_text.decode())
         file1.Upload()
         print(decrypted_text)
+
+def find_folder(folder, folder_name):
+    for file1 in folder:
+        if file1["title"] == folder_name:
+            return file1["id"]
+    return None
 
 # list all files in the drive folder 
 def list_all_files(folder):
@@ -53,15 +66,16 @@ def main():
     gauth.SaveCredentialsFile("credentials.txt")
     # Create GoogleDrive instance with authenticated GoogleAuth instance.
     drive = GoogleDrive(gauth)
-    
+    print(create_folder("17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy","stth", drive))
+    '''
     key = Encryptor.generate_key()
     folder = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
-    
     #testing if I can get the encryption and decryption properly
     encrypt_all_files(key, folder)
     decrypt_all_files(key, folder)
     list_all_files(folder)
     delete_all_files(folder)
+    '''
     
 if __name__ == '__main__':
     main()
