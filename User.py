@@ -32,10 +32,8 @@ def retrieve_asymmetrical_key(username, address, port, group_address, group_list
 
     group_connection = group_listener.accept()
 
-    # res = b"error"
     encryption_key = b"error"
     try:
-        # res = group_connection.recv()
         encryption_key = group_connection.recv()
     except:
         pass
@@ -139,11 +137,6 @@ def main():
     
     folder_id = drive_folders['sylas']
     sym_key = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
-    '''
-    res = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
-    sym_key = KeySaver.generate_asymmetric_key(user_key, res[0])
-    folder_id = res[1]
-    '''
     running = True
     
     while running:     
@@ -151,11 +144,6 @@ def main():
         
         # requests for symmetrical key in case it is changed
         sym_key = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
-        '''
-        res = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
-        sym_key = KeySaver.generate_symmetric_key(user_key, res[0])
-        folder_id = res[1]
-        '''
         
         # handles instructions from users
         argv = inputs.split(' ')

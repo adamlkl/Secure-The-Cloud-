@@ -25,7 +25,6 @@ class CloudGroup(threading.Thread):
         self.lock = lock
         self.listener = listener
         self.key = sym_key
-        # self.folder_id = folder_id
         self.running = True
     
     # change symmetric key of the CloudGroup
@@ -58,8 +57,7 @@ class CloudGroup(threading.Thread):
                     
                     public_key = KeySaver.load_public_key(message[2])
                     encrypted_key = Encryptor.encrypt_symmetric_key(public_key, self.key)
-                    # res = [encrypted_key, self.folder_id]
-                    # response.send(res)
+                    
                     response.send(encrypted_key)
                     response.close()
                 else:
