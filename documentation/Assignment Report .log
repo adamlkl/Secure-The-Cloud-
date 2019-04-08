@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  8 APR 2019 07:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  8 APR 2019 12:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -375,10 +375,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--67
 
  []
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--69
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
+
+ []
+
+[3] (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 72.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 83.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -388,26 +408,69 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 8.
 
-[2] [3] [4]) [5] (../CloudGroup.py [6] [7] [8]) [9] [10]
-(./Assignment Report .aux) ) 
+[4] [5]) [6]
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 99.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
+ [7]
+(../CloudGroup.py [8] [9] [10]) [11]
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
+
+ []
+
+(../Encryptor.py [12] [13]) [14] (../DriveManager.py [15]) [16] (../KeySaver.py
+[17]) [18] (./Assignment Report .aux) ) 
 Here is how much of TeX's memory you used:
- 5678 strings out of 492649
- 74774 string characters out of 6129622
- 418689 words of memory out of 5000000
- 9473 multiletter control sequences out of 15000+600000
- 13569 words of font info for 32 fonts, out of 8000000 for 9000
+ 5756 strings out of 492649
+ 75952 string characters out of 6129622
+ 425706 words of memory out of 5000000
+ 9539 multiletter control sequences out of 15000+600000
+ 13826 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,43p,453b,1829s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips
-/base/8r.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrb8a
-.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
-sr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/loca
-l/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/
-2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "Assignment Report .pdf" (10 pages, 86232 bytes).
+ 41i,6n,43p,933b,1803s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2018/texmf-dist/font
+s/enc/dvips/base/8r.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/cour
+ier/ucrb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrr
+8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
+</usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/loca
+l/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on "Assignment Report .pdf" (18 pages, 114050 bytes).
 PDF statistics:
- 58 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
+ 87 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

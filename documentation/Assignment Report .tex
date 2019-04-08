@@ -65,20 +65,83 @@ The implementation of this assignment can be divided into mainly two components:
 
 The highlight of the design revolves around how to transmit symmetric keys to valid users in the group securely. The symmetric keys used for encryption when uploading files and decryption when downloading. One critical assumption that is took on during the development of the application is such that the activities of the cloud storage group is always being peeked on and the contents in it is always exposed to outsiders. \\
 
-As a result, the contents in the cloud storage has to be encrypted for data protection and can only be decrypted by users who have access to the symmetric keys. To achieve this, a symmetric key has to shared securely among the users. The initiative taken here is to have the users send their public keys to the cloud storage group, so that it can be used to encrypt the symmetric key during transmission. Further and more circumstantial explanation of the modus operandi will be elaborated below.
+As a result, the contents in the cloud storage has to be encrypted for data protection and can only be decrypted by users who have access to the symmetric keys. To achieve this, a symmetric key has to shared securely among the users. The initiative taken here is to have the users send their public keys to the cloud storage group, so that it can be used to encrypt the symmetric key during transmission. \\
+
+For this assignment, the target cloud storage is Google Drive. Further and more circumstantial explanation of the modus operandi will be elaborated below.
+\newpage
 \subsection*{User Interface}
-The user interface 
-\subsubsection*{Implementation}
+\subsubsection*{Implementation:}
+The user interface allows every user to log in using their user names and create their own unique asymmetrical keys. The asymmetrical keys of every user is stored, so that it can loaded the next time the same users access the user interface. Each asymmetrical key pair consist of a public key and a private key. The public key is sent along with the user name and the user port number to the cloud drive group as authentication terms to request for the symmetric key used for encryption and decryption of files in the group. If the user is not listed as one of legitimate members in the group, no symmetrical keys will be sent in response and an illegal trespassing exception will be reported. On the other hand, if the request is authorized, the public key sent will be utilized to encrypt the symmetric key and the package will then be transmitted back as response. \\
+
+Subsequently, upon attaining the encrypted symmetric key from the cloud storage group, the private key in the key pair is then used to decrypt the encrypted symmetric key. To summarise, the symmetric key ensures the overall protection of the files in the cloud storage while its sanctity is assured by the asymmetrical key pairs approach used during transmissions. All users have to continuously request for the symmetrical keys from the cloud storage group to ensure they have the most updated version key in case of renewals being carried out due to a member being ousted.\\
+
+A local GoogleDrive web server is then set up to handle authentication to the target folder in the cloud drive, before creating a GoogleDrive instance to enable any alterations to be done between local and the cloud drive. This allow the users to upload and download files from the cloud storage. During uploading, the symmetrical keys are used to encrypt the file contents before being written to the new file. Similarly, when downloading, the file contents read will be decrypted using the same key and written to file before being saved to the downloads folder. The application always assume that the visibility of the cloud storage is always compromised, so even if a non-member user managed to gain access to the files on the drive, he or she won't be able to read the file contents since he or she doesn't have access to the symmetric keys used in encryption and decryption. \\
+
+The user class make use of the Key Manager module to create, save and load the users' corresponding keys, while all the encryption and decryption work are facilitated by importing the Encryptor module. Moreover, a socket is set up to relay requests to the cloud storage group whereas a listener is initialize to receive responses. 
+\newpage
 \subsubsection*{Code:}
 \lstinputlisting[language=Python]{../User.py}
 \newpage
 \subsection*{Cloud Storage Group}
-\subsubsection*{Implementation}
+\subsubsection*{Implementation:}
+The cloud storage group is mainly responsible for the management of the operations of the cloud storage such as adding or removing users from the members list, re-encrypting all the files on the drive folder when a user is evicted, listen to requests from users that are either members or non-members and relay the appropriate response message. \\
+
+Upon activation, the cloud storage group will attempt to load a stored list into a set data structure which contains the user names of registered members. This is later used to validate the access of symmetrical keys when requested by users. Then, the symmetrical keys are loaded from the local data storage or created if no copy exists and stored for future usage and reference. \\ 
+
+The cloud storage group employs the functionality of listener and clients from the multiprocessing library in Python. Multiprocessing is a package that supports spawning processes using an API similar to the threading module. The multiprocessing package offers both local and remote concurrency to the design. A listener, which is a wrapper for a bound socket is used to ‘listen’ for connections established by sockets from users. An authentication key is also used as the secret key here for an HMAC-based authentication challenge. This ensures that the connection can only be carried by users through the specified interface. \\
+
+While active. the listener will attempt to receive requests from users through the connections established. These requests come in the form of a list containing the user names, address of user's listener and a public key. The cloud storage group will then respond by validating the user's membership using the member list. A illegal access error exception will be raised if a non-member attempts to request for the symmetrical key. On the contrary, if a member requests is authorised, a socket, i.e. Client will be used instead to set up a connection to the member's listener. The connection will serve as a pathway to transmit a symmetric key encrypted using the received public key back to the user. \\
+
+For this component, the main concern that has to be take into account is a situation where a member is evicted, since adding a new member only involves the member having access to the symmetric key the next time he applies for it. In situation where a member is removed from the list, it is essential to have counter measures designated for it. There are two alternatives available for this complexity. Either the Cloud Storage Group could broadcast the new symmetric key to every members in the user list or it could just wait for an incoming request for symmetric keys from its group members and send the new ones during the transmissions. In this context, the latter is selected to as there would be no need for new symmetrical keys if no upload or download activities are carried out by the users, hence unnecessary broadcasting can be avoided, thus reducing the complexity of the routine algorithm. \\
+
+Knowing that, the only protocols needed when a member is removed from the group are as follows:
+\begin{itemize}
+\item Decrypt all the files in the corresponding cloud drive.
+\item Create a new symmetric key and save the key.
+\item Encrypt all the files in the corresponding cloud drive.
+\end{itemize}
+The mentioned steps are crucial and requisite to avoid the removed member from having access to the drive and being able to read the contents of the uploaded files on the drive.
+\vspace*{10mm}
 \subsubsection*{Code:}
 \lstinputlisting[language=Python]{../CloudGroup.py}
 \newpage
-\subsection*{Modules}
-\subsubsection*{Encryptor:}
-\subsubsection*{Drive Manager:}
-\subsubsection*{Key Manager:}
+\section*{Modules}
+Since a lot of subroutines that leverage available cryptography libraries are shared by both classes mentioned above, modules are created for different purposes to provide helper functions while significantly reducing the need to import corresponding cryptographic libraries in every classes aside from repeating the same chunk of code. \\
+\subsection*{Encryptor}
+\subsubsection*{Implementation}
+The Encryptor is set up to process all the encryption and decryption of the files passed. This module uses Fernet since it guarantees that a text encrypted by it cannot be manipulated or read without the specific passed key. Fernet is known for its symmetric authenticated cryptography implementation(also known as “secret key”). \\
+
+Helper functions included in this module are:
+\begin{itemize}
+\item generating a fresh Fernet key.
+\item generating a private, 2048 bits long RSA key which unlike keys used in symmetric cryptography, has a complex internal structure with specific mathematical properties.
+\item encrypt a plain text using the passed key and return the encrypted version
+\item decrypt an encrypted text using the passed key and  return the decrypted version
+\end{itemize} 
+\vspace*{10mm}
+\subsubsection*{Code:}
+\lstinputlisting[language=Python]{../Encryptor.py}
+\newpage
+\subsection*{Drive Manager}
+\subsubsection*{Implementation}
+The Drive Manager is a simple module that provides simple functionalities such as encrypting, decrypting, listing and deleting all the files in the corresponding folder. This module is built upon the Encryptor. 
+\vspace*{10mm}
+\subsubsection*{Code:}
+\lstinputlisting[language=Python]{../DriveManager.py}
+\newpage
+\subsection*{Key Manager}
+\subsubsection*{Implementation}
+The Key Saver is a module responsible for key management. It takes advantage of the subroutines available in the Cryptography libraries to implement its functions:
+\begin{itemize}
+\item saving private key by converting it into bytes form using serialization and writing the contents onto a file.
+\item load private key by reading the byte form contents of the passed file.
+\item Extracting the public part of a key in bytes.
+\item Generate a symmetric key using SHA-256, a cryptographic secure hash algorithm 
+\end{itemize}
+\vspace*{10mm}
+\subsubsection*{Code:}
+\lstinputlisting[language=Python]{../KeySaver.py} 
+\vspace*{30mm}
+\section*{Improvements:}
+In long run, a graphical user interface version of the application can be developed to provide more comprehensive usage and systematic interactive usage to users. 
 \end{document}
