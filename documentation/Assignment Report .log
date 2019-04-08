@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  8 APR 2019 23:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  9 APR 2019 00:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -423,26 +423,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--90
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
-
- []
-
-
+<./Images/design.png, id=25, 388.5717pt x 361.35pt>
+File: ./Images/design.png Graphic file (type png)
+<use ./Images/design.png>
+Package pdftex.def Info: ./Images/design.png  used on input line 101.
+(pdftex.def)             Requested size: 213.71509pt x 198.74312pt.
+[4 <./Images/design.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
  []
@@ -452,10 +452,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 108--109
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 110--111
+
+ []
+
 [5] (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 113.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 115.
 
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ot1pcr.fd
@@ -467,11 +472,6 @@ LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 8.
 
 [6] [7] [8]) [9]
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 119--120
 
  []
@@ -491,31 +491,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--126
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 129.
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 131.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 129.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 131.
  [10]
 (../CloudGroup.py [11] [12] [13]) [14]
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
 
  []
 
 (../Encryptor.py [15] [16]) [17] (../DriveManager.py [18]) [19] (../KeySaver.py
 [20]) [21] (./Assignment Report .aux) ) 
 Here is how much of TeX's memory you used:
- 5803 strings out of 492649
- 76824 string characters out of 6129622
- 416975 words of memory out of 5000000
- 9579 multiletter control sequences out of 15000+600000
+ 5808 strings out of 492649
+ 76929 string characters out of 6129622
+ 417027 words of memory out of 5000000
+ 9583 multiletter control sequences out of 15000+600000
  13826 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,6n,43p,933b,1803s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -526,10 +531,10 @@ ier/ucrb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrr
 8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
 </usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/loca
 l/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "Assignment Report .pdf" (21 pages, 929166 bytes).
+Output written on "Assignment Report .pdf" (21 pages, 1001207 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
+ 110 PDF objects out of 1000 (max. 8388607)
  68 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

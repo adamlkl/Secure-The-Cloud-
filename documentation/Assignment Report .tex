@@ -89,7 +89,6 @@ To compensate for this vulnerability, another encryption has to be implemented t
 The aim of this project is to develop a secure cloud storage application for Dropbox, Box, Google Drive, Office365 etc. For example, the application should be able to secure all files that are uploaded to the cloud, such that only people that are part of your “Secure Cloud Storage Group” will be able to decrypt your uploaded files. To all other users the files will be encrypted. \\ 
 
 A suitable key management system will be designed and implemented for the application that will allow files to be shared securely, and users to be added and removed from “Secure Cloud Storage Group”. The application can be set up on a desktop or mobile platform and make use of any open source cryptographic libraries.
-\vspace*{10mm}
 \section*{Design}
 The implementation of this assignment can be divided into mainly two components: User Interface and a Cloud Storage Group. These components make use of different modules that consists of helper functions to execute their tasks. \\
 
@@ -97,7 +96,10 @@ The highlight of the design revolves around how to transmit symmetric keys to va
 
 As a result, the contents in the cloud storage has to be encrypted for data protection and can only be decrypted by users who have access to the symmetric keys. To achieve this, a symmetric key has to shared securely among the users. The initiative taken here is to have the users send their public keys to the cloud storage group, so that it can be used to encrypt the symmetric key during transmission. \\
 
-For this assignment, the target cloud storage is Google Drive. Further and more circumstantial explanation of the modus operandi will be elaborated below.
+For this assignment, the target cloud storage is Google Drive. Further and more circumstantial explanation of the modus operandi will be elaborated later while the described design is as illustrated below.
+\begin{center}
+\includegraphics[scale=0.55]{design}
+\end{center}
 \newpage
 \subsection*{User Interface}
 \subsubsection*{Implementation:}
