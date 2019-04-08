@@ -1,0 +1,84 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]%
+{geometry}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\usepackage{lipsum}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+\delimitershortfall-1sp
+\newcommand\abs[1]{\left|#1\right|}
+\graphicspath{ {./Images/} }
+
+\definecolor{lightgray}{RGB}{214, 219, 223}
+\definecolor{limegreen}{RGB}{11, 83, 69}
+\definecolor{blue}{RGB}{0, 70, 255}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{lightgray}, 
+    showstringspaces=false,  
+    belowcaptionskip=1\baselineskip,
+    basicstyle=\footnotesize\ttfamily,
+  	keywordstyle=\bfseries\color{green!40!black},
+  	commentstyle=\itshape\color{purple!40!black},
+  	identifierstyle=\color{blue},
+  	stringstyle=\color{orange},
+    breaklines=true
+    language=Python
+}
+\lstset{style=mystyle}
+\makeatletter
+\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+\begin{flushleft}
+  \textbf{\@title}
+
+  \@author
+  \@date
+\end{flushleft}\egroup
+}
+\makeatother
+
+\begin{document}
+\title{\large Course: CS3031 Advanced Telecommunications \\ \normalsize Title: Assignment 2 - Securing the Cloud }
+\author{Name: Leong Kai Ler \\ Student Number: 15334636 \\   }
+\date{Date: April 8, 2019}
+\maketitle
+
+\section*{Introduction:}
+
+
+\section*{Purpose:}
+The aim of this project is to develop a secure cloud storage application for Dropbox, Box, Google Drive, Office365 etc. For example, the application should be able to secure all files that are uploaded to the cloud, such that only people that are part of your “Secure Cloud Storage Group” will be able to decrypt your uploaded files. To all other users the files will be encrypted. \\ 
+
+A suitable key management system will be designed and implemented for the application that will allow files to be shared securely, and users to be added and removed from “Secure Cloud Storage Group”. The application can be set up on a desktop or mobile platform and make use of any open source cryptographic libraries.
+\newpage
+\section*{Design}
+The implementation of this assignment can be divided into mainly two components: User Interface and a Cloud Storage Group. These components make use of different modules that consists of helper functions to execute their tasks. \\
+
+The highlight of the design revolves around how to transmit symmetric keys to valid users in the group securely. The symmetric keys used for encryption when uploading files and decryption when downloading. One critical assumption that is took on during the development of the application is such that the activities of the cloud storage group is always being peeked on and the contents in it is always exposed to outsiders. \\
+
+As a result, the contents in the cloud storage has to be encrypted for data protection and can only be decrypted by users who have access to the symmetric keys. To achieve this, a symmetric key has to shared securely among the users. The initiative taken here is to have the users send their public keys to the cloud storage group, so that it can be used to encrypt the symmetric key during transmission. Further and more circumstantial explanation of the modus operandi will be elaborated below.
+\subsection*{User Interface}
+The user interface 
+\subsubsection*{Implementation}
+\subsubsection*{Code:}
+\lstinputlisting[language=Python]{../User.py}
+\newpage
+\subsection*{Cloud Storage Group}
+\subsubsection*{Implementation}
+\subsubsection*{Code:}
+\lstinputlisting[language=Python]{../CloudGroup.py}
+\newpage
+\subsection*{Modules}
+\subsubsection*{Encryptor:}
+\subsubsection*{Drive Manager:}
+\subsubsection*{Key Manager:}
+\end{document}
