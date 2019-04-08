@@ -53,13 +53,43 @@
 \maketitle
 
 \section*{Introduction:}
+Data encryption are typically employed in activities concerned with communications to protect the contents of text, messages and even files from being comprehended by anyone but the intended recipients. Aside from that, it allow recipients prove that a message came from a particular sender and has not been intercepted and altered.   \\
 
+End-to-end encryption relies heavily on public key cryptography tools. Under normal circumstances, this can be achieved using Symmetric Encryption. The problem statement  behind this approach is that the sender wants to pass a message to the intended receiver through a channel. However, this channel consists of several intermediaries that are nosy and insecure. In other words, it is constantly being peeked on by an outsider and vulnerable to attacks. Thus, it is vital to encrypt the message before transmission and have it decrypted when payload data reaches the receiver. This way, even if the message is intercepted in the middle of the transmission, no one other than the intended receiver could comprehend its contents. In this approach, the encryption keys used for both sides are the same, hence it is called symmetric encryption. \\ 
 
+\begin{center}
+\includegraphics[scale=0.5]{normal}
+\end{center}
+
+Nevertheless, this is nowhere close in providing ample assurance on the security of the transmission as symmetric cryptography doesn't address the issue where someone could just eavesdrop and steal the symmetric key being sent from the sender to the receiver. \\
+
+\begin{center}
+\includegraphics[scale=0.5]{midatk}
+\end{center}
+
+This allows the eavesdropper to conduct attacks in the middle by intercepting the message and make alterations to the contents. the attacker could read, alter and delete information packed in the payload and sends it to the receiver. \\
+ 
+\begin{center}
+\includegraphics[scale=0.5]{messing}
+\end{center}
+
+Consequently, the wrong message will be directed towards the receiver instead. \\
+
+\begin{center}
+\includegraphics[scale=0.5]{wrong}
+\end{center}
+
+To compensate for this vulnerability, another encryption has to be implemented to make the symmetric key resilient to the attacks mentioned above. One initiative that can be resorted to is by encrypting the symmetric key using public key and read the decrypted version using the corresponding private key. The idea is to have the receiver broadcasting his or her public key while the sender use it to encrypt the keys or messages. As a result, only the intended can read the data while the intermediaries only have access to the metadata, such as the subject line, dates, sender, and recipient.\\
+
+\begin{center}
+\includegraphics[scale=0.5]{proper}
+\end{center}
+\newpage
 \section*{Purpose:}
 The aim of this project is to develop a secure cloud storage application for Dropbox, Box, Google Drive, Office365 etc. For example, the application should be able to secure all files that are uploaded to the cloud, such that only people that are part of your “Secure Cloud Storage Group” will be able to decrypt your uploaded files. To all other users the files will be encrypted. \\ 
 
 A suitable key management system will be designed and implemented for the application that will allow files to be shared securely, and users to be added and removed from “Secure Cloud Storage Group”. The application can be set up on a desktop or mobile platform and make use of any open source cryptographic libraries.
-\newpage
+\vspace*{10mm}
 \section*{Design}
 The implementation of this assignment can be divided into mainly two components: User Interface and a Cloud Storage Group. These components make use of different modules that consists of helper functions to execute their tasks. \\
 
@@ -100,7 +130,7 @@ Knowing that, the only protocols needed when a member is removed from the group 
 \item Create a new symmetric key and save the key.
 \item Encrypt all the files in the corresponding cloud drive.
 \end{itemize}
-The mentioned steps are crucial and requisite to avoid the removed member from having access to the drive and being able to read the contents of the uploaded files on the drive.
+The mentioned steps are crucial and requisite to avoid the removed member from having access to the drive and being able to read the contents of the uploaded files on the drive. A shared lock used to prevent transmissions and substituting of symmetric key in the group.
 \vspace*{10mm}
 \subsubsection*{Code:}
 \lstinputlisting[language=Python]{../CloudGroup.py}
@@ -143,5 +173,5 @@ The Key Saver is a module responsible for key management. It takes advantage of 
 \lstinputlisting[language=Python]{../KeySaver.py} 
 \vspace*{30mm}
 \section*{Improvements:}
-In long run, a graphical user interface version of the application can be developed to provide more comprehensive usage and systematic interactive usage to users. 
+In long run, a graphical user interface version of the application can be developed to provide more comprehensive usage and systematic interactive usage to users. Better threads and lock management for the program. Moreover, a master server class can be implemented to regulate all the  contents and traffic data on the cloud storage. As for the encryption, signing and verification can be implemented externally to prevent impostor from stealing the public key in asymmetric encryption. 
 \end{document}

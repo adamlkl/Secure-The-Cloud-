@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  8 APR 2019 22:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  8 APR 2019 23:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -359,46 +359,104 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 55.
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--60
+Underfull \hbox (badness 10000) in paragraph at lines 56--57
 
  []
 
-[1
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 58--59
+
+ []
+
+<./Images/normal.png, id=1, 793.96625pt x 279.0425pt>
+File: ./Images/normal.png Graphic file (type png)
+<use ./Images/normal.png>
+Package pdftex.def Info: ./Images/normal.png  used on input line 61.
+(pdftex.def)             Requested size: 396.98215pt x 139.5209pt.
+
 Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
+<./Images/midatk.png, id=3, 825.0825pt x 405.515pt>
+File: ./Images/midatk.png Graphic file (type png)
+<use ./Images/midatk.png>
+Package pdftex.def Info: ./Images/midatk.png  used on input line 67.
+(pdftex.def)             Requested size: 412.54024pt x 202.75699pt.
+[1
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--67
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 68--69
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 74--75
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Image
+s/normal.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 70--71
 
  []
 
+<./Images/messing.png, id=12, 829.0975pt x 397.485pt>
+File: ./Images/messing.png Graphic file (type png)
+<use ./Images/messing.png>
+Package pdftex.def Info: ./Images/messing.png  used on input line 73.
+(pdftex.def)             Requested size: 414.54774pt x 198.742pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 76--77
 
  []
 
+<./Images/wrong.png, id=13, 820.56563pt x 316.18124pt>
+File: ./Images/wrong.png Graphic file (type png)
+<use ./Images/wrong.png>
+Package pdftex.def Info: ./Images/wrong.png  used on input line 79.
+(pdftex.def)             Requested size: 410.28181pt x 158.09023pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
 
  []
 
-[3] (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
+[2 <./Images/midatk.png> <./Images/messing.png> <./Images/wrong.png>]
+<./Images/proper.png, id=20, 750.805pt x 364.36125pt>
+File: ./Images/proper.png Graphic file (type png)
+<use ./Images/proper.png>
+Package pdftex.def Info: ./Images/proper.png  used on input line 85.
+(pdftex.def)             Requested size: 375.40158pt x 182.18018pt.
+ [3 <./Images/proper.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 104--105
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
+
+ []
+
+[5] (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 83.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 113.
+
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -408,55 +466,56 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 8.
 
-[4] [5] [6]) [7]
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+[6] [7] [8]) [9]
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--94
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--96
+Underfull \hbox (badness 10000) in paragraph at lines 125--126
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 99.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 129.
+
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
- [8]
-(../CloudGroup.py [9] [10] [11]) [12]
-Underfull \hbox (badness 10000) in paragraph at lines 109--110
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 129.
+ [10]
+(../CloudGroup.py [11] [12] [13]) [14]
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--113
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
 
  []
 
-(../Encryptor.py [13] [14]) [15] (../DriveManager.py [16]) [17] (../KeySaver.py
-[18]) [19] (./Assignment Report .aux) ) 
+(../Encryptor.py [15] [16]) [17] (../DriveManager.py [18]) [19] (../KeySaver.py
+[20]) [21] (./Assignment Report .aux) ) 
 Here is how much of TeX's memory you used:
- 5776 strings out of 492649
- 76286 string characters out of 6129622
- 418706 words of memory out of 5000000
- 9559 multiletter control sequences out of 15000+600000
+ 5803 strings out of 492649
+ 76824 string characters out of 6129622
+ 416975 words of memory out of 5000000
+ 9579 multiletter control sequences out of 15000+600000
  13826 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,6n,43p,933b,1803s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -467,10 +526,10 @@ ier/ucrb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrr
 8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
 </usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/loca
 l/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "Assignment Report .pdf" (19 pages, 118677 bytes).
+Output written on "Assignment Report .pdf" (21 pages, 929166 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 108 PDF objects out of 1000 (max. 8388607)
+ 68 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
