@@ -82,7 +82,7 @@ def print_fileList(drive):
 def main():
     # get username
     username = raw_input("Enter username?\n")
-    
+    group = raw_input("Enter Group?\n")
     '''
         - try to load user's key using username 
         - if found, load the key from file
@@ -135,7 +135,7 @@ def main():
     file_list.close()
     '''
     
-    folder_id = drive_folders['sylas']
+    folder_id = drive_folders[group]
     sym_key = retrieve_asymmetrical_key(username, address, port, group_address, group_listener, user_key)
     running = True
     
