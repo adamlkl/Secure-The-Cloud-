@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  9 APR 2019 00:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  9 APR 2019 11:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -517,10 +517,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 144--145
 (../Encryptor.py [15] [16]) [17] (../DriveManager.py [18]) [19] (../KeySaver.py
 [20]) [21] (./Assignment Report .aux) ) 
 Here is how much of TeX's memory you used:
- 5808 strings out of 492649
- 76929 string characters out of 6129622
- 417027 words of memory out of 5000000
- 9583 multiletter control sequences out of 15000+600000
+ 5809 strings out of 492649
+ 76939 string characters out of 6129622
+ 420027 words of memory out of 5000000
+ 9584 multiletter control sequences out of 15000+600000
  13826 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,6n,43p,933b,1803s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -531,7 +531,7 @@ ier/ucrb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrr
 8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
 </usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/loca
 l/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "Assignment Report .pdf" (21 pages, 1001207 bytes).
+Output written on "Assignment Report .pdf" (21 pages, 1001231 bytes).
 PDF statistics:
  110 PDF objects out of 1000 (max. 8388607)
  68 compressed objects within 1 object stream
