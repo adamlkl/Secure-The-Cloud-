@@ -133,7 +133,7 @@ def main():
     # Create GoogleDrive instance with authenticated GoogleAuth instance.
     drive = GoogleDrive(gauth)
     
-    root_folder_id = "17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy"
+    root_folder_id = "//drive folder id"
     root_folder = drive.ListFile({'q': "'" + root_folder_id + "' in parents and trashed=false"}).GetList()
     
     if DriveManager.find_folder(root_folder,groupname) is None:

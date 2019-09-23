@@ -16,7 +16,7 @@ from multiprocessing.connection import Listener
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
-folder_Id = '17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy'
+folder_Id = '//drive folder id'
              
 '''            
     - try to establish connection with CloudGroup
@@ -75,7 +75,7 @@ def usage():
 # print list of files in drive folder 
 def print_fileList(drive):
     # Auto-iterate through all files that matches this query
-    file_list = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
+    file_list = drive.ListFile({'q': "'//drive folder id' in parents and trashed=false"}).GetList()
     for file1 in file_list:
         print('title: %s, id: %s' % (file1['title'], file1['id']))
     

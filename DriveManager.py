@@ -74,7 +74,7 @@ def main():
     drive = GoogleDrive(gauth)
     
     key = Encryptor.generate_key()
-    folder = drive.ListFile({'q': "'17oua44SP5sR6E_g_h3a9Ua5qjHqAFvFy' in parents and trashed=false"}).GetList()
+    folder = drive.ListFile({'q': "'//drive folder id' in parents and trashed=false"}).GetList()
     
     #testing if I can get the encryption and decryption properly
     encrypt_all_files(key, folder)
